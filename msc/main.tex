@@ -1,0 +1,89 @@
+\documentclass[
+  12pt,
+  twoside,
+  english,
+  singlespacing,
+  headsepline,
+  consistentlayout,
+  %showLineNumbers,
+]{auxiliary/si-msc-thesis}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{mathpazo}
+\usepackage{setspace}
+
+% MARGIN SETTINGS
+
+\geometry{
+  paper=a4paper,
+  inner=1.5cm,
+  outer=1.5cm,
+  bindingoffset=0cm,
+  top=1.5cm,
+  bottom=2.7cm, 
+  %showframe, % Uncomment to show how the type block is set on the page
+}
+
+\input{auxiliary/listings-extra}
+
+% THESIS INFORMATION
+
+\thesistitle{Automated Assessment of\\Student Understanding of\\Expressions in Their Own Code}
+% \thesissubtitle{TODO}
+
+\author{Joey Bevilacqua}
+
+\monthyear{June 2023}
+
+\supervisor{Matthias Hauswirth}
+
+\cosupervisorone{Igor Moreno Santos}
+
+% FRONT MATTER
+
+\begin{document}
+
+\frontmatter
+\pagestyle{plain}
+
+% TITLE PAGE
+
+\input{auxiliary/titlepage}
+
+% ABSTRACT
+
+\input{chapters/0-abstract}
+
+% PREAMBLE
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+% MAIN MATTER
+
+\mainmatter%
+ 
+\pagestyle{thesis}
+\input{chapters/1-intro}
+\input{chapters/2-bg-rw}
+\input{chapters/3-loop}
+\input{chapters/4-etl}
+\input{chapters/5-dn}
+\input{chapters/6-impl}
+\input{chapters/7-fb}
+\input{chapters/8-end}
+
+\appendix
+\input{chapters/0-appendix}
+
+% BIBLIOGRAPHY
+
+\newpage
+\bibliographystyle{plainnat}
+\nocite{*}
+\bibliography{biblio}
+
+\end{document}

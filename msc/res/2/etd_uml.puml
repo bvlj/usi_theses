@@ -1,0 +1,53 @@
+@startuml
+
+class ExprTreeDiagram {
+  Set<Node> nodes
+  Set<Edge> edges
+  Node root
+}
+
+class Node {
+  Plug nodePlug
+  List<NodeContentElem> content
+  String type
+  String value
+}
+
+class Edge {
+  Plug plugA
+  Plug plugB
+}
+
+interface NodeContentElem
+
+class OtherContent implements NodeContentElem {
+  String content
+}
+class NameDef implements NodeContentElem {
+  String name
+}
+class NameUse implements NodeContentElem {
+  String name
+}
+class Hole implements NodeContentElem {
+  Plug plug
+}
+
+class Plug {
+  long valA
+  long valB
+}
+
+Plug <|-- Hole
+Plug <|-- Node
+Plug <|-- Edge
+
+Node <|-- ExprTreeDiagram 
+
+Edge <|-- ExprTreeDiagram 
+
+NodeContentElem <|-- Node
+
+skinparam shadowing false
+skinparam defaultFontName Courier
+@enduml

@@ -1,0 +1,77 @@
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{bp-blue} {RGB}{  2, 103, 193}
+\definecolor{bp-green}{RGB}{ 35, 150, 127}
+\definecolor{bp-grey} {RGB}{145, 129, 117}
+\definecolor{bp-red}  {RGB}{254,  95,  85}
+
+\lstdefinestyle{tuna}{
+  literate={*}{*}1
+}
+\lstset{
+  basicstyle=\ttfamily,
+  breaklines=true,
+  captionpos=b,
+  columns=fullflexible,
+  commentstyle=\color{bp-grey}
+  % numbers=left,
+  numbersep=10pt,
+  showstringspaces=false,
+  stringstyle=\color{bp-green},
+  style=tuna,
+}
+\lstloadlanguages{java,xml}
+
+\lstdefinelanguage{antlr}{
+  breaklines=true,
+  moredelim=[s][\color{bp-green}\ttfamily]{'}{'},
+  commentstyle={\color{bp-grey}\itshape},
+  morecomment=[l]{//},
+  morekeywords={grammar, fragment},
+  keywordstyle={\color{bp-blue}},
+}
+
+\lstdefinelanguage{etl}{
+  breaklines=true,
+  morestring=[b]",
+  stringstyle=\color{bp-green}\ttfamily,
+  moredelim=[s][\color{bp-blue}\ttfamily]{\/}{\/},
+  commentstyle={\color{bp-grey}\itshape},
+  morekeywords={_},
+  keywordstyle={\color{bp-blue}},
+  morecomment=[l]{\#},
+}
+
+\lstdefinelanguage{etl-vm}[]{}{
+  breaklines=true,
+  morestring=[b]",
+  stringstyle=\color{bp-green}\ttfamily,
+  commentstyle={\color{bp-grey}\itshape},
+  morekeywords={elem, child, jump, split, match, mark},
+  keywordstyle={\color{bp-blue}},
+}
+
+\lstdefinelanguage{pseudocode}{
+  breaklines=true,
+  commentstyle={\color{bp-grey}\itshape},
+  morecomment=[l]{\#},
+  morekeywords={def, and, or, not, false, true, \&,
+                while, if, else, break, is, return, \\},
+  keywordstyle={\color{bp-blue}},
+}
+
+\lstdefinelanguage{xpath}{
+  breaklines=true,
+  moredelim=[s][\color{bp-green}\ttfamily]{'}{'},
+  morekeywords={and, or, not, false, true, ancestor, |,
+                @Operator, @Expression},
+  keywordstyle={\color{bp-blue}},
+}
+
+\lstdefinelanguage{yaml}[]{}{
+  breaklines=true,
+  moredelim=[s][\color{bp-green}\ttfamily]{'}{'},
+  morekeywords={true, false, null, y, n, -},
+  keywordstyle={\color{bp-blue}},
+}

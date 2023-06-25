@@ -1,0 +1,29 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{
+  arrows,
+  automata,
+  fit,
+  positioning
+}
+\tikzset{
+  ->,
+  >=stealth,
+  node distance = 0.5cm and 1cm,
+  every state/.style = {thick},
+  initial text = $ $,
+}
+
+\begin{document}
+\begin{tikzpicture}[baseline=1]
+  \node[state, initial] (0) {$0$};
+  \node[state, above right=of 0] (1) {$1$};
+  \node[state, below right=of 0] (2) {$2$};
+  \node[state, above right=of 2, accepting] (4) {$4$};
+  \draw
+      (0) edge[above] node{$a$} (1)
+      (0) edge[above] node{$b$} (2)
+      (1) edge[above] node{$\epsilon$} (4)
+      (2) edge[above] node{$\epsilon$} (4);
+\end{tikzpicture}
+\end{document}

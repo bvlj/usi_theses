@@ -1,0 +1,40 @@
+digraph mygraph {
+  graph [pad="0.5", nodesep="1", ranksep="0.5"];
+  node [shape=box];
+
+  "terminal" [color="green"]
+  "browser" [color="green"]
+
+  subgraph cluster_black_1 {
+    color="black"
+    "expression-service-cli"
+    "expression-service-web"
+    "expression-service"
+    "jdt-java-compiler"
+    "expression-service-cli" -> "expression-service"
+    "expression-service-web" -> "expression-service"
+    "expression-service" -> "jdt-java-compiler"
+  }
+
+  subgraph cluster_black_2 {
+    color="black"
+    "python-service"
+    "python-interpreter"
+    "python-service" -> "python-interpreter"
+  }
+
+  subgraph cluster_black_3 {
+    color="black"
+    "expression-tutor-cli"
+    "expression-tutor"
+    "database"
+    "expression-tutor-cli" -> "expression-tutor"
+    "expression-tutor" -> "database"
+  }
+
+  "terminal" -> "expression-service-cli"
+  "terminal" -> "expression-tutor-cli"
+  "browser" -> "expression-tutor"
+  "expression-tutor" -> "expression-service-web"
+  "expression-service" -> "python-service"
+}

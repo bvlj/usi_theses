@@ -1,0 +1,124 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Conclusion}
+
+\begin{chapterBody}
+
+In this thesis, we presented a number of contributions to the Expression
+Tutor platform that enable the automatic generation and assessment of 
+personalized learning activities for each student at scale.
+
+% P1 - Identify Expressions
+We started by designing and implementing a way for instructors to specify what
+learning goal the automatically generated activity should cover. This is
+accomplished through the use of the Expression Tree Language
+(\textbf{Chapter~\ref{sec:etl}}). This domain–specific language allows
+instructors to  select expressions in sources code files that pertain to their
+learning goals.
+As seen in the evaluation of the Expression Tree Language
+(Section~\ref{sec:etl-eval}), it is capable of representing all
+expression–related constructs of a complex ``real world'' programming language
+such the Java programming language (version 11).
+We use this query to search for specific expressions that pertain to the
+instructor's learning goals in the coding assignment of students.
+
+% P2 - Distractor Nodes + Activity Generator
+We use the selected expression to generate a personalized Expression Tutor
+activity for students. To do so, we automatically generate distractor nodes
+(\textbf{Section~\ref{sec:dn-distractors}}).
+The criterion used to generate these nodes is to attempt to re–create the
+incorrect nodes that students drew when building expression trees in exams
+(Section~\ref{sec:dn-distractors-gen}).
+Then, we implement a system to automatically generate Expression Tutor
+activities from the each student's repositories on GitHub by using a GitHub
+Action (\textbf{Section~\ref{sec:impl-aag}}).
+
+% P3 - Assessment + Student Feedback + Instructor Feedback
+Upon submission of the student's activity, the system performs an
+automatic assessment  \hfill\break
+(\textbf{Section~\ref{sec:fb-assess}}) and provides formative
+feedback to the student (\textbf{Section~\ref{sec:fb-ff}}).
+This feedback informs the students about the mistakes in their
+submission and guides them towards the correct one by providing hints.
+The same assessment system also gathers all assessments of the activities of
+the different students and provides instructors with feedback 
+(\textbf{Section~\ref{sec:fb-sf}}) that offers both aggregate information about
+the mistakes found in students' submissions and the possibility to view each
+individual submission in detail.
+
+\section{Future Work \& Limitations}
+
+In this section, we detail possible enhancements to our system that would
+help overcome existing limitations.
+
+\subsection*{Expanding Query Capabilities of ETL}
+
+One area in which the capabilities of ETL could be improved is support for more
+advanced type querying. At the time of writing, the types are compared as
+\textit{plain strings} by the query DSL. By introducing the concept of type
+analysis to ETL, it would be possible to write queries with generic types.
+One such example would be a query that involves a sub–expression of type 
+``array of an undetermined type \texttt{T}'' and another sub–expression of
+type \texttt{T}. The main challenge of implementing such a feature lies in how
+different languages have different (and sometimes even unsound) type
+systems~\cite{lu_gradual_2022}.
+It would require additional information generated while converting expressions
+from the source code that defines a language–agnostic representation of a type
+hierarchy of all types involved in said expression.
+
+\subsection*{Improvements to Distractor Node Generation}
+
+The distractor node generators that have been implemented and detailed in this
+document were designed by \textit{just} looking at the answers found in two
+different sets of exams submissions. The expressions students were tasked to draw
+an Expression Tree for were focusing on particular learning goals, and thus, the
+incorrect nodes that were found by manually inspecting the exams were always
+going to be biased towards said learning goals. To make the selection of
+distractor nodes that are generated better, it would be necessary to look at
+even more exams, possibly those that tasked students to draw Expression Trees
+for expressions that were selected with different learning goals in mind.
+
+Moreover, it would be possible to improve the current generators by applying
+additional heuristics to exclude certain distractors that are less likely to be
+picked by students. Reducing the number of distractors by removing those that
+are \textit{too easy to spot} also reduces the cognitive load on the student who
+has to look for the correct node among all those provided in the initial state
+of the activity.
+The assessment system and activity groups that were introduced in this document
+are features that will be useful in easily gathering such data to improve the
+quality of the automatically generated distractors in the future.
+
+\subsection*{Support for Languages Other Than Java in the GitHub Action}
+
+The GitHub Action (and thus the associated Docker image) allows to 
+automatically generate activities from the code in the student's repository.
+The current implementation of said action only includes the components necessary
+to perform source code analysis and expression extraction for code written in
+the Java programming language. It would definitively be useful to also include
+support for extracting expressions from the other languages already supported by
+the Expression Tutor platform such as Python. No implementation detail or code
+change would be necessary other than just installing the necessary additional 
+components to the Docker image, as the expression service code is already
+capable of autonomously invoking them should they be available.
+
+\subsection*{Evaluation of Feedback Functionality}
+
+The feedback system has not yet been properly fully evaluated to verify whether
+all requirements were met. In particular, there is some initial evaluation of
+the formative feedback provided to students, but follow–up interviews would be
+necessary. Moreover, there has been no evaluation of the feedback
+provided to instructors.
+
+\subsection*{Support for Additional Types of Activities}
+
+At the time of writing, the system supports only one type of Expression
+Tutor activities. It would be possible to implement different types of
+activities, each with a different configuration for the initial state and
+assessment process. One such example would be \textit{typing} activities.
+In such cases, instead of being provided nodes that need to be selected and 
+connected to form an expression tree, students would receive an already
+composed expression tree. The task consists of labeling all the nodes with the
+correct type and identifying possible type errors. The assessment process would
+differ because now the correctness of the node contents would no longer be
+relevant.
+
+\end{chapterBody}
